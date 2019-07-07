@@ -1,0 +1,1 @@
+{"disp_map_count": 2, "disp_max_abs_value": 40, "disp_max_offset": 4, "disp_max_scale": 0.9, "disp_max_rotate": 10, "reference_pixel_size": 0.3}
