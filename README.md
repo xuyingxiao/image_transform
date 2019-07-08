@@ -2,6 +2,15 @@
 This is a demo.It exists because that tf.contrib.image.transform cannot back propagation gradients into transformation parameters.
 While I want to pred and updated this parameters by deep learning and I think is derivable if interpolation is ignored.
 
+Files:
+image_transform.py is the main file.Just run "python image_transform.py"
+config.json is some configuration parameters.
+classification: it's input data. decode by dataset_multires.py
+runs: it's the train log.
+train_vis.png:it's a screenshot image of l1_loss+warp_loss.
+***._utils.py is some common functions.
+
+
 Input:
 	input_image[batch_size, 220,220,3]
 	input_disp_polygon_map[batch_size, 220,220,3]
@@ -11,7 +20,7 @@ Input:
 	scale_y  [batch_size, 1]
 	offset_x [batch_size, 1]
 	offset_y  [batch_size, 1]
-	
+
 Output:
 	branch_five_param_pred_output is the five parameters mentioned.[batch_size,5]
 	
