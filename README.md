@@ -1,6 +1,7 @@
 # image_transform
 This is a demo.It exists because that tf.contrib.image.transform cannot back propagation gradients into transformation parameters.
 While I want to pred and updated this parameters by deep learning and I think is derivable if interpolation is ignored.
+
 Input:
 	input_image[batch_size, 220,220,3]
 	input_disp_polygon_map[batch_size, 220,220,3]
@@ -10,14 +11,18 @@ Input:
 	scale_y  [batch_size, 1]
 	offset_x [batch_size, 1]
 	offset_y  [batch_size, 1]
+	
 Output:
 	branch_five_param_pred_output is the five parameters mentioned.[batch_size,5]
+	
 Network:
 This demo uses a simple network. 2 branches input (input image & input_disp_polygon_map) conv and then concat, and then 2 fc layers (500 nodes),
 and output a [batch_size,5] tensor with pred_rotate_theta,pred_scale_x,pred_scale_x,pred_offset_x,pred_offset_y
+
 Loss:
 1.l1_loss
     l1_loss = tf.reduce_mean(tf.abs(pred_rotate_theta - gt_rotate_theta) + tf.abs(pred_scale_x - gt_scale_x) + tf.abs(pred_scale_y - gt_scale_y) + tf.abs(pred_offset_x - gt_offset_x) + tf.abs(pred_offset_y - gt_offset_y))
+
 2.warp_loss
 I conducted the homo matrix by pred parameters and applied to the input_disp_polygon_map,aimed to make these two images/tensors(warp image & seg_gt) as similar as possible.
 While it can't run if there is only warp_loss because "No gradients provided for any variable", and runs if there are l1_loss+warp_loss with warp_loss not converge.
